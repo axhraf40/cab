@@ -1,0 +1,37 @@
+{% extends 'gestion_cabinet/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Nouvelle consultation - Cabinet Dentaire{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h4 class="card-title mb-0">Nouvelle consultation</h4>
+            </div>
+            <div class="card-body">
+                <div class="mb-4">
+                    <h5>Informations du rendez-vous</h5>
+                    <p><strong>Patient :</strong> {{ rendez_vous.patient }}</p>
+                    <p><strong>Date :</strong> {{ rendez_vous.date_heure|date:"d/m/Y H:i" }}</p>
+                    <p><strong>Motif :</strong> {{ rendez_vous.motif }}</p>
+                </div>
+                
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save me-2"></i>Enregistrer la consultation
+                        </button>
+                        <a href="{% url 'rendez_vous_list' %}" class="btn btn-secondary">
+                            <i class="fas fa-times me-2"></i>Annuler
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 
